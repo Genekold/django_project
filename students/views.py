@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView
 
-from students.models import MyModel
+from students.models import Student, MyModel
 
 
 class MyModelCreatView(CreateView):
@@ -32,5 +32,19 @@ def contact(request):
         return HttpResponse(f"Спасибо {name}! Сообщение получено.")
     return render(request, 'students/contact.html')
 
-def example_view(request):
-    return render(request, 'students')
+
+def index(request):
+    student = Student.objects.get(id=1)
+    context = {
+        'student_name': f"{student.first_name} {student.last_name}",
+        'student_year': student.get_year_display(),
+    }
+    return render(request, 'students/index.html', context=context)
+
+
+def student_detail(request):
+    student = Student.objects.get(id=1)
+    context = {
+        'student': student,
+    }
+    return render(request, 'students/student_detail.html', context=context)
