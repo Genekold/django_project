@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Student info</title>
-</head>
-<body>
-    <h1>Информация о студенте</h1>
-    <p>Имя: {{ student.first_name }}</p>
-    <p>Фамилия: {{ student.last_name}}</p>
-    <p>Курс: {{ student.get_year_display }}</p>
+{% extends 'students/base.html' %}
 
-</body>
-</html>
+{% block title %}Список студентов нашего вуза{% endblock %}
+
+{% block content %}
+{% include 'students/header.html' %}
+<h2>Детали студента</h2>
+<p>Имя: {{student.first_name }}</p>
+<p>Фамилия: {{student.last_name }}</p>
+<p>Курс: {{student.get_year_display }}</p>
+{% endblock %}
