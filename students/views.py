@@ -1,10 +1,25 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 
+from students.forms import StudentForms
 from students.models import Student, MyModel
+
+
+class StudentCreateView(CreateView):
+    model = Student
+    form_class = StudentForms
+    template_name = 'students/student_form.html'
+    success_url = reverse_lazy('students:student_list')
+
+
+class StudentUpdateView(UpdateView):
+    model = Student
+    form_class = StudentForms
+    template_name = 'students/student_form.html'
+    success_url = reverse_lazy('students:student_list')
 
 
 class MyModelCreatView(CreateView):
