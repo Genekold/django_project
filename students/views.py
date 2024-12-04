@@ -3,19 +3,20 @@ from django.http import HttpResponse, Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from students.forms import StudentForms
 from students.models import Student, MyModel
 
 
-class StudentCreateView(CreateView):
+class StudentCreateView(LoginRequiredMixin, CreateView):
     model = Student
     form_class = StudentForms
     template_name = 'students/student_form.html'
     success_url = reverse_lazy('students:student_list')
 
 
-class StudentUpdateView(UpdateView):
+class StudentUpdateView(LoginRequiredMixin, UpdateView):
     model = Student
     form_class = StudentForms
     template_name = 'students/student_form.html'

@@ -1,13 +1,13 @@
 {% extends 'students/base.html' %}
+
 {% block content %}
 <body>
     <div class="container">
-        <h1 class="mb-4">Форма для работы со студентом</h1>
+        <h1 class="mb-4">Вход на сайт</h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-            <a href="{% url 'students:student_list' %}">Отмена</a>
+            <button type="submit" class="btn btn-primary">Войти</button>
         </form>
     </div>
     <script src="/static/js/bootstrap.bundle.min.js"></script>

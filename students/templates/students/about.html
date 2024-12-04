@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width-device-width, initial-scale=1.0">
-    <title>О нас</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-</head>
+{% extends 'students/base.html' %}
+{% block content %}
+{% include 'students/header.html' %}
 <body>
 <div class="container">
     <h1 class="mt-5">О нас</h1>
-    <p class="lead">Добро пожаловать на наш сайт! мы - команда разработчиков из разных уголков мира, работающая над увлекательными
+    <p class="lead">Добро пожаловать на наш сайт! мы - команда разработчиков из разных уголков мира, работающая над
+        увлекательными
         проектами.</p>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
 </div>
 </body>
-</html>
+{% endblock %}
