@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from students.forms import StudentForms
 from students.models import Student, MyModel
@@ -23,7 +23,7 @@ class StudentUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('students:student_list')
 
 
-class MyModelCreatView(CreateView):
+class MyModelCreatView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = MyModel
     fields = ['name', 'description']
     template_name = 'students/mymodel_form.html'
@@ -40,7 +40,7 @@ class MyModelCreatView(CreateView):
         return response
 
 
-class MyModelListView(ListView):
+class MyModelListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = MyModel
     template_name = 'students/mymodel_list.html'
     context_object_name = 'mymodels'
@@ -49,7 +49,7 @@ class MyModelListView(ListView):
         return MyModel.objects.filter(is_active=True)
 
 
-class MyModelDetailView(DetailView):
+class MyModelDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = MyModel
     template_name = 'students/mymodel_detail.html'
     context_object_name = 'mymodel'
@@ -69,14 +69,14 @@ class MyModelDetailView(DetailView):
         return obj
 
 
-class MyModelUpdateView(UpdateView):
+class MyModelUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = MyModel
     fields = ['name', 'description']
     template_name = 'students/mymodel_form.html'
     success_url = reverse_lazy('students:mymodel_list')
 
 
-class MyModelDeleteView(DeleteView):
+class MyModelDeleteView(LoginRequiredMixin, DeleteView):
     model = MyModel
     template_name = 'students/mymodel_confirne_delete.html'
     success_url = reverse_lazy('students:mymodel_list')
